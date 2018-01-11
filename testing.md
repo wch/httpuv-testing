@@ -154,3 +154,25 @@ Percentage of the requests served within a certain time (ms)
 
 **NOTE:** On macOS, if about 16000 requests are made within a short amount of time, subsequent requests will simply fail, until the computer does some housecleaning. This can take somewhere from 10 seconds to one minute. This problem does not seem to occur on Linux.
 
+
+## Desired tests
+
+We want to the tests to make sure of the following:
+
+* There are no crashes.
+* The responses from the application are correct.
+* There are no significant performance regressions.
+
+Many of these tests will involve throwing lots of requests at the server -- on the order of tens of thousands of them. Sometimes the memory-related bugs do not reveal themselves until after many requests.
+
+Apachebench can send lots of requests to an application, but there are some limitations: each run of `ab` will only send requests to one URL, and it doesn't the responses for correctness. Still, it can be useful for making sure that the application doesn't crash.
+
+The application in test.R provides a number of endpoints that exercise different features in httpuv.
+
+In the future, we will also want to test Shiny applications, because Shiny uses parts of httpuv that aren't covered by simple httpuv applications, like the one in test.R.
+
+There are other tests cases which are more difficult to script. For example, we will want to have the client make a request, and the disconnect before the server sends a response.
+
+
+TODO: Write about using debugging builds of R in Docker.
+
