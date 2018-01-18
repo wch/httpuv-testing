@@ -10,6 +10,6 @@ RUN apt-get install -y \
 COPY test.R /
 
 RUN RD             -e "devtools::install_github('rstudio/httpuv@background-thread')"
-RUN RDvalgrind2    -e "devtools::install_github('rstudio/httpuv@background-thread')"
+RUN RDvalgrind     -e "devtools::install_github('rstudio/httpuv@background-thread')"
 # RUN RDsan          -e "devtools::install_github('rstudio/httpuv@background-thread')"
 RUN RDassertthread -e "devtools::install_github('rstudio/httpuv@background-thread')"
